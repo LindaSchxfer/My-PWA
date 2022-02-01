@@ -22,6 +22,6 @@ export class TodoService extends Dexie {
   }
 
   add(title:string){
-    this.todos.add({title, id:'v4', done: false});
+    this.todos.add({title, id: v4(), done: false});
   }
 }

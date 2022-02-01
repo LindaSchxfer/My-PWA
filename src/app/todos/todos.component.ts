@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { Todo } from '../todo';
+import { TodoService } from '../todo.service';
 
 @Component({
   selector: 'app-todos',
@@ -7,9 +9,21 @@ import { Component, OnInit } from '@angular/core';
 })
 export class TodosComponent implements OnInit {
 
-  constructor() { }
+  todos: Todo[] = [];
+
+  constructor( private todoService: TodoService) { }
 
   ngOnInit(): void {
+    this.loadTodos();
+  }
+
+  async add(title: string){
+    await this.todoService.add(title);
+    await this.loadTodos();
+  }
+
+  async loadTodos(){
+    this.todos = await this.todoService.getAll();
   }
 
 }
